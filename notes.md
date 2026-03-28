@@ -9,19 +9,19 @@ Channel/Poiseuille Flow (pressure-driven flow between two stationary parallel pl
 
 The laminar state (the smooth, parabolic, or linear velocity profile) is linearly stable to infinitesimal perturbations at all Reynolds numbers ($Re$), but nonlinearly unstable to finite-amplitude perturbations.
 
-turbulence does not arise from a smooth linear instability; it must be "triggered" by a sufficiently large disturbance.
+turbulence does not arise from a linear instability, it requires a sufficiently large disturbance.
 
-### why study this?
-Full Laminar Flow: Perfectly understood. The Navier-Stokes equations yield exact, stable, analytical solutions for these geometries (e.g., the parabolic Hagen-Poiseuille profile for pipe flow).
+### Why study this?
+Full Laminar Flow: Perfectly understood. The Navier-Stokes equations have exact, stable, analytical solutions for these geometries (e.g., the parabolic Hagen-Poiseuille profile for pipe flow).
 
-Fully Developed Turbulence: While still an open problem mathematically, it is largely understood statistically (e.g., Kolmogorov's 1941 theory of energy cascades). It is ubiquitous and robust at high Reynolds numbers.
+Fully Developed Turbulence: While still an open problem mathematically, it is largely understood statistically (e.g., Kolmogorov's 1941 theory of energy cascades) at high Reynolds numbers.
 
-We study transitions from a state that is completely stable to infinitesimal perturbations into chaos. understand the purely nonlinear mechanisms that create and sustain turbulence.
+We study transitions from a state that is completely stable to infinitesimal perturbations into chaos to understand the purely nonlinear mechanisms that create and sustain turbulence.
 
 
 ## Dynamical Systems
 
-we project the infinite-dimensional Navier-Stokes velocity field onto a state space where each point represents an instantaneous 3D fluid velocity field
+We project the infinite-dimensional Navier-Stokes velocity field onto a state space where each point represents an instantaneous 3D fluid velocity field
 
 
 ### How de we know that we get a chaotic saddle in our system?
@@ -30,16 +30,29 @@ we project the infinite-dimensional Navier-Stokes velocity field onto a state sp
 - sensitivity to initial conditions
 - between the laminar and the turbulent states there exists no intermediate state
 - and that turbulence is not persistent, i.e., it can decay again, if the observation time is long enough. 
-=> chaotic saddle
 
-#### ECS Exact Coherent Structures: exact, time-invariant, or periodic solution to the full, nonlinear Navier-Stokes equations that is unstable. These are 
-- Exact Travelling Waves (fixed spacial shape that simply travels downstream)
-- Relative Periodic Orbits (RPO) (moving oscillating structure that is periodic with time T while it shifts downstream). It satisfies $x(t + T) = g \cdot x(t)$, where $T$ is the period and $g$ is a symmetry operation (like a spatial shift). unstable periodic orbit (UPO). The lyapunov exponents in the
+This suggests a chaotic saddle
+
+#### ECS Exact Coherent Structures: exact, time-invariant, or periodic solution to the full, nonlinear Navier-Stokes equations that is unstable. These are:
+- Exact Travelling Waves (fixed spacial shape that simply travels downstream). In a co-moving frame it is an unstable fixed point (a saddle point). eigenvalues of the linearized Navier-Stokes operator around this fixed point positive real parts
+- Relative Periodic Orbits (RPO) (moving oscillating structure that is periodic with time T while it shifts downstream). Unstable Periodic Orbit (UPO) /* It satisfies $x(t + T) = g \cdot x(t)$, where $T$ is the period and $g$ is a symmetry operation (like a spatial shift). but we work in the symmetry-reduced phase space. The lyapunov exponents in the direction of the flow is 0 (every periodic orbit (that is not a fixed point) has at least one Lyapunov exponent that is exactly zero, and this exponent corresponds to the perturbation tangent to the flow.) and the */
 
 
 
+We find ECS using a mathematical technique called the Newton-Krylov method.
+// XXX
 
-We find them using a mathematical technique called the Newton-Krylov method.
+We run a DNS of a turbulent pipe.
+
+We watch the chaotic trajectory in phase space. Occasionally, the turbulence slows down and visually resembles a coherent structure for a few milliseconds before violently bursting again.
+
+We grab that exact 3D velocity field and feed it into a Newton solver. The solver uses a massive Jacobian matrix to find the mathematical root—the exact TW or RPO nearby.
+
+Once we have the exact mathematical state, we compute its eigenvalues. We find it has many stable directions (eigenvalues with negative real parts) and a few strictly unstable directions (positive real parts). This rigorously proves it is a saddle.
+
+We observe trajectories leaving one ECS precisely along its calculated unstable eigenvector and landing near the stable eigenvector of another ECS. This proves the heteroclinic connections of the chaotic saddle.
+
+
 - You take a snapshot of a turbulent puff from a DNS simulation.
 - You feed it into a Newton-Raphson solver adapted for massive, high-dimensional spaces (the Krylov subspace).
 - The solver iteratively searches for a state where the flow field repeats itself exactly after some time $T$, or travels downstream at a constant wave speed $c$ without changing shape.
@@ -85,7 +98,7 @@ saddle is not fully trapping. It has stable manifolds (directions trajectories f
 - The Observation/Decay Time ($\tau_{decay}$): The average lifetime of the turbulent patch before the trajectory escapes the saddle and falls into the laminar state.
 
 Because $\tau_{mix} \ll \tau_{decay}$, the internal chaotic dynamics mix the system rapidly that the fluid effectively "forgets" its initial conditions long before it decays. Consequently, the probability of the trajectory finding the escape route to the laminar state is constant per unit time. exponential survival probability distribution ($P(t) \sim e^{-t/\tau_{decay}}$) = memoryless Poisson process.
-=
+
 The Timescale Separation: Because $\tau_{mix} \ll \tau_{decay}$, the trajectory is stretched and folded across the entire saddle much faster than it leaks out through $E$.The Loss of Memory: Because the system is strongly mixing, after a short time $t > \tau_{mix}$, the trajectory is smeared uniformly according to the natural measure of the saddle. Therefore, at any given moment, the probability of the trajectory wandering into the escape hole $E$ is purely a function of the geometric size (measure) of $E$ relative to the saddle, $\mu(E)$.
 
 Since $\mu(E)$ is constant, the system has a constant probability $p$ of escaping per unit time, regardless of where it was $\Delta t$ ago.I
