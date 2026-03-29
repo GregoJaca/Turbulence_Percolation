@@ -112,14 +112,12 @@ The chaotic saddle is not fully trapping. It has stable manifolds (directions tr
 In the transitional regime to turbulence $\tau_{mix} \ll \tau_{decay}$ 
 
 /*
-$\tau_{mix}$ is roughly constant, while $\tau_{decay}$ grows super-exponentially fast (because the measure of the chaotic saddles in phase space grows rapidly, while the size of the escape route E remains roughly constant, so it's relative measure $\mu(E)$ shrinks to 0)
+$\tau_{mix}$ is roughly constant, while $\tau_{decay}$ grows super-exponentially or exponentially (there is conflicting evidence) fast (because the measure of the chaotic saddles in phase space grows rapidly, while the size of the escape route E remains roughly constant, so it's relative measure $\mu(E)$ shrinks to 0)
 */
 
-Because $\tau_{mix} \ll \tau_{decay}$, the internal chaotic dynamics mix the system rapidly that the fluid effectively "forgets" its initial conditions long before it decays. Consequently, the probability of the trajectory finding the escape route to the laminar state is constant per unit time. exponential survival probability distribution ($P(t) \sim e^{-t/\tau_{decay}}$) = memoryless Poisson process.
+The Timescale Separation: Because $\tau_{mix} \ll \tau_{decay}$, the trajectory is stretched and folded across the entire saddle much faster than it leaks out through the escape path E. Because the system is strongly mixing, after a short time $t > \tau_{mix}$, the trajectory is distributed uniformly according to the natural measure of the saddle. Therefore, at any given moment, the probability of the trajectory wandering into the escape hole $E$ is purely a function of the (measure) of $E$ relative to the saddle, $\mu(E)$.
 
-The Timescale Separation: Because $\tau_{mix} \ll \tau_{decay}$, the trajectory is stretched and folded across the entire saddle much faster than it leaks out through the escape path E.The Loss of Memory: Because the system is strongly mixing, after a short time $t > \tau_{mix}$, the trajectory is smeared uniformly according to the natural measure of the saddle. Therefore, at any given moment, the probability of the trajectory wandering into the escape hole $E$ is purely a function of the geometric size (measure) of $E$ relative to the saddle, $\mu(E)$.
-
-Since $\mu(E)$ is constant, the system has a constant probability $p$ of escaping per unit time, regardless of where it was $\Delta t$ ago. If the probability of surviving one time step is $(1-p)$, the probability of surviving $N$ time steps is $(1-p)^N$. In continuous time, this rigorously yields an exponential survival probability:
+Since $\mu(E)$ is constant, the system has a constant probability $p$ of escaping per unit time, regardless of where it was $\Delta t$ ago. If the probability of surviving one time step is $(1-p)$, the probability of surviving $N$ time steps is $(1-p)^N$. In continuous time, this is an exponential survival probability:
 $$P(t) = e^{-\gamma t}$$
 where $\gamma$ is the escape rate ($\gamma = 1/\tau_{decay}$). An exponential distribution is the unique continuous probability distribution that possesses the memoryless (Markov) property: 
 
@@ -215,7 +213,7 @@ Assumptions: markovian memorylessness & strictly absorbing state (Laminar)
 * **Percolation Theory:** N/A.
 
 #### 3. Subcritical Transient Chaos: $Re_{SN} < Re < Re_c$ ($1250 < Re < 2040$)
-* **Fluid Mechanics (What Changes):** You can now trigger localized turbulent "puffs." However, they always eventually decay back to laminar. As $Re$ increases, their characteristic lifetime ($\tau_{decay}$) increases super-exponentially. 
+* **Fluid Mechanics (What Changes):** You can now trigger localized turbulent "puffs." However, they always eventually decay back to laminar. As $Re$ increases, their characteristic lifetime ($\tau_{decay}$) increases super-exponentially or exponentially (there is conflicting evidence). 
 * **Dynamical Systems (What Changes):** A cascade of secondary bifurcations occurs. More and more ECS pairs are born. The chaotic saddle grows incredibly dense and complex. Crucially, the **basin boundary moves closer to the laminar fixed point**, meaning smaller physical disturbances are required to trigger turbulence. 
 * **Percolation Theory (What Stays):** We are in the subcritical regime of the graph. The decay probability of a turbulent node is higher than its splitting/infection probability. The macroscopic turbulent fraction $\rho$ is strictly $0$.
 
@@ -265,7 +263,7 @@ conditions in this shear flow.
 
 
 
+A universal transition to turbulence in channel flow
 
-
-
+measuring four critical exponents, a universal scaling function and a scaling relation, all in agreement with the (2+1)-dimensional directed percolation universality class.
 
