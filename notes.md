@@ -151,12 +151,16 @@ Pipe Flow: The flow is confined radially and azimuthally. Turbulence can only sp
 Couette / Channel Flow: The flow is confined between parallel plates but is infinitely wide in the spanwise and streamwise directions. Turbulence can spread in a 2D plane. The DP graph is 2D space + 1D time (2+1D DP).
 */
 
+/*
+This is different from a tree, because in DP you can get merging, and space is correlated. In trees, offspring are non-interacting.
+*/
+
 ## What can we predict?
 
 - Universal Scaling Exponents: The DP universality class dictates how the "turbulent fraction" (the percentage of the fluid that is turbulent) grows above $Re_c$. For 1+1D DP, the fraction $\rho$ grows as $\rho \propto (Re - Re_c)^\beta$, where the universal constant $\beta \approx 0.276$. Fluids perfectly match this purely theoretical statistical number.
 - Spatiotemporal Intermittency: The phase transition is continuous (second-order). At $Re_c$, the whole pipe doesn't instantly become turbulent. Instead, it becomes an intermittent, fluctuating equilibrium of turbulent bands and laminar gaps.
-- Spatial Correlation Length ($\xi_\perp$): The typical size of a correlated turbulent cluster scales as $\xi_\perp \propto (Re - Re_c)^{-\nu_\perp}$. (For 1+1D DP, $\nu_\perp \approx 1.09$).
-- Temporal Correlation Time ($\xi_\parallel$): The typical lifetime of these correlated fluctuations scales as $\xi_\parallel \propto (Re - Re_c)^{-\nu_\parallel}$. (For 1+1D DP, $\nu_\parallel \approx 1.73$).
+- Spatial Correlation Length ($\xi_\perp$): The typical size of a correlated turbulent cluster scales as $\xi_\perp \propto (Re - Re_c)^{-\nu_\perp}$. (For 1+1D DP, $\nu_\perp \approx 1.09$). (the characteristic spatial distance over which fluctuations in the system are statistically correlated.)
+- Temporal Correlation Time ($\xi_\parallel$): The typical lifetime of these correlated fluctuations scales as $\xi_\parallel \propto (Re - Re_c)^{-\nu_\parallel}$. (For 1+1D DP, $\nu_\parallel \approx 1.73$). (the macroscopic characteristic "memory" or lifetime of a fluctuation.)
 - Laminar Gap Distribution: DP predicts that the probability distribution of finding a laminar gap of length $L$ will follow a pure scale-free power law: $P(L) \propto L^{-\mu_\perp}$ where $\mu_\perp = 2 - \beta / \nu_\perp$.
 - Universality and independence from boundary conditions. Plane Couette flow (sheared walls) and Channel flow (pressure-driven) have completely different Navier-Stokes base profiles. They are both 2D+1D DP, so they will have the same universal exponents.
 
@@ -196,45 +200,14 @@ Assumptions: markovian memorylessness & strictly absorbing state (Laminar)
 
 
 
-
-
-apparently, there is no phase space "phase transition" at Re_c. The phase transition is macroscopic and described by Percolation
-also at Re > Re_c the chaotic saddles do not become chaotic attractors, rather, the turbulence patches just grow more than they die.
-phase transition is macroscopic, not microscopic!
-(this is true in large enough domains, in small domains you also get the transition in phase space
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Timeline of Subcritical Turbulence (Pipe Flow)
+### How does the turbulence profile depend on Re?
 
 #### 1. The Laminar Regime: $0 < Re < Re_{SN}$ ($Re \lesssim 1250$)
 * **Fluid Mechanics:** Viscous dissipation completely dominates advection. The Hagen-Poiseuille profile is unconditionally stable. Any disturbance, no matter the amplitude, is damped out.
 * **Dynamical Systems:** The phase space is effectively empty. The laminar state is a global attractor. Its basin of attraction is the entire infinite-dimensional space.
 * **Percolation Theory:** N/A.
 
-#### 2. The Birth of the Saddle: $Re = Re_{SN}$ ($Re \approx 1250$)
+#### 2. Appearance of Chaotic Saddles: $Re = Re_{SN}$ ($Re \approx 1250$)
 * **Fluid Mechanics:** Advection becomes just strong enough to balance viscosity in a highly specific, localized configuration. The "Self-Sustaining Process" becomes physically possible.
 * **Dynamical Systems (What Changes):** A mathematical **Saddle-Node Bifurcation** occurs. Out of nowhere, pairs of Exact Coherent Structures (ECSs) materialize in the phase space. 
     * The "Lower Branch" ECS forms the **Edge of Chaos** (the basin boundary).
@@ -248,12 +221,12 @@ phase transition is macroscopic, not microscopic!
 
 #### 4. The Macroscopic Phase Transition: $Re = Re_c$ ($Re \approx 2040$)
 * **Fluid Mechanics (What Changes):** Turbulent puffs begin to split (replicate) at the exact same rate that they decay. The flow enters a state of sustained spatiotemporal intermittency.
-* **Dynamical Systems (What Stays):** **Absolutely nothing qualitatively changes here.** The local phase space topology does not undergo a bifurcation. The chaotic saddle is still a "leaky" saddle. The Edge of Chaos still exists. 
-* **Percolation Theory (What Changes):** This is the Directed Percolation critical point. The spatial spreading rate matches the local decay rate. This is where the statistical memorylessness of the local chaotic saddle perfectly feeds the macroscopic stochastic lattice.
+* **Dynamical Systems (What Stays):** **nothing qualitatively changes here.**
+* **Percolation Theory (What Changes):** This is the Directed Percolation critical point. The spatial spreading rate matches the local decay rate.
 
 #### 5. Spatiotemporal Intermittency: $Re_c < Re < \approx 2700$
 * **Fluid Mechanics (What Changes):** Turbulent puffs begin to merge into expanding "slugs." The pipe is a dynamic mixture of turbulent and laminar bands.
-* **Dynamical Systems (What Stays):** If you zoom in on any specific segment of the pipe, the trajectory is still wandering on a transient chaotic saddle. It only survives locally because turbulence is constantly invading from upstream/downstream.
+* **Dynamical Systems (What Stays):** **nothing qualitatively changes here.**   
 * **Percolation Theory (What Changes):** We are in the supercritical regime. The turbulent fraction $\rho$ grows from $0$ following the universal DP scaling law: $\rho \propto (Re - Re_c)^\beta$ (where $\beta \approx 0.276$ for 1+1D).
 
 #### 6. Fully Developed Turbulence: $Re \gg 2700$
@@ -263,6 +236,11 @@ phase transition is macroscopic, not microscopic!
 
 
 
+There is no phase space "phase transition" at Re_c. The phase transition is macroscopic and described by Percolation model. Also at Re > Re_c the chaotic saddles do not become chaotic attractors, rather, the turbulence patches just grow more than they die.
+phase transition is macroscopic, not microscopic!
+(this is true in large enough domains, in small domains you also get the transition in phase space
+
+Above the $Re-c$ the macroscopic spatial spreading rate of the turbulence exceeds the local decay rate. The fluid sustains turbulence not by altering its local deterministic dynamics into an attractor, but through spatial replication. It is a purely macroscopic effect.
 
 
 
@@ -283,27 +261,6 @@ Traveling Waves in Pipe Flow
 A family of three-dimensional traveling waves for flow through a pipe of circular cross section is identified. The traveling waves are dominated by pairs of downstream vortices and streaks. They originate in saddle-node bifurcations at Reynolds numbers as low as 1250. All states are immediately unstable. Their dynamical significance is that they provide a skeleton for the formation of a chaotic saddle that can explain the intermittent transition to turbulence and the sensitive dependence on initial
 conditions in this shear flow.
 (first mathematically proved the existence of the ECS in pipe flow using Newton-Krylov methods)
-
-
-
-
-
-
-it's funny that "emergence of turbulence at critical Re" sounds like something that is super fine and you need to look at very microscopically, but a super coarse percolation graph does the trick
-
-what sort of questions can the percolation model answer?
-- expansion
-- phase transitions
-- decay? lifetime? survival? of the patches
--
-
-
-is direct percolation like percolation on a tree?
-
-
-Misconceptions
-
-Above the $Re-c$ the macroscopic spatial spreading rate of the turbulence exceeds the local decay rate. The fluid sustains turbulence not by altering its local deterministic dynamics into an attractor, but through spatial replication. It is a purely macroscopic effect.
 
 
 
