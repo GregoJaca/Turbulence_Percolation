@@ -29,7 +29,7 @@ We project the infinite-dimensional Navier-Stokes velocity field onto a state sp
 #### Experiments show:
 - sensitivity to initial conditions
 - between the laminar and the turbulent states there exists no intermediate state
-- and that turbulence is not persistent, i.e., it can decay again, if the observation time is long enough. 
+- turbulence is not persistent, it decays if the observation time is long enough. 
 
 This suggests a chaotic saddle
 
@@ -86,7 +86,9 @@ A turbulent patch is a self-sustaining cycle of streamwise vortices and streaks.
 
 On the chaotic saddle, trajectories diverge exponentially along unstable directions (positive Lyapunov exponents) and are folded back by the system's boundaries. If you start with a tight cluster of initial conditions, the flow stretches and folds this cluster until it becomes a fine, fractal filament that permeates the entire saddle.
 
-Mathematically, a system with invariant measure $\mu$ is strongly mixing if, for any two measurable regions $A$ and $B$ in the phase space:$$\lim_{t \to \infty} \mu(A \cap \Phi^{-t}(B)) = \mu(A)\mu(B)$$where $\Phi^{-t}(B)$ is the pre-image of $B$ under the flow at time $t$
+Mathematically, a system with invariant measure $\mu$ is strongly mixing if, for any two measurable regions $A$ and $B$ in the phase space:
+$\lim_{t \to \infty} \mu(A \cap \Phi^{-t}(B)) = \mu(A)\mu(B)$
+where $\Phi^{-t}(B)$ is the pre-image of $B$ under the flow at time $t$
 
 If you start with a localized cluster of similar initial conditions (region $A$), the chaotic dynamics (stretching and folding via positive Lyapunov exponents) will smear this cluster across the entire chaotic saddle. After the mixing time ($\tau_{mix}$), the proportion of your initial cluster that finds itself inside any region $B$ is simply proportional to the overall volume of $B$. The system has completely "forgotten" that the trajectories started localized in $A$.
 
