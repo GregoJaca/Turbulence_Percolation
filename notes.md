@@ -40,22 +40,19 @@ This suggests a chaotic saddle
 
 
 We find ECS using a mathematical technique called the Newton-Krylov method.
-// XXX
 
-We run a DNS of a turbulent pipe.
+/*
 
-We watch the chaotic trajectory in phase space. Occasionally, the turbulence slows down and visually resembles a coherent structure for a few milliseconds before violently bursting again.
+1.  Initial Guess: Run a Direct Numerical Simulation (DNS). Monitor the chaotic phase space trajectory. When the phase space becomes recurrent (RPO) or reaches close to 0 speed (indicating closeness to ECS point), save that instantaneous 3D velocity field ($\mathbf{u}_0$) as your initial guess. (We need an initial guess because Krylov solver converges only for good guesses)
+2.  Search for a Traveling Wave (TW) or Relative Periodic Orbit (RPO) as a nonlinear root-finding problem: $\mathbf{G}(\mathbf{u}) = \mathbf{0}$ (e.g., state at $t=0$ exactly equals state at $t=T$).
+3.  Matrix-Free Solver (GMRES): Standard Newton-Raphson requires building and inverting an impossible $10^6 \times 10^6$ Jacobian matrix. Instead, use the Krylov subspace algorithm (GMRES). GMRES only requires the *effect* of the Jacobian on a vector, which is approximated using tiny, forward-time DNS finite differences. The matrix is never actually built.
+4.  Convergence (Proof of Existence): Iterate the GMRES solver to update $\mathbf{u}_0$. When the residual error $\|\mathbf{G}(\mathbf{u})\|$ drops to machine precision (e.g., $10^{-10}$), the mathematical existence of the ECS is rigorously proven.
+5.  Proof of Saddle: Feed the exact ECS into an Arnoldi iteration (another matrix-free algorithm) to calculate its leading eigenvalues. Finding eigenvalues with strictly positive real parts proves the ECS has unstable manifolds, classifying it as a topological saddle.
+6.  Heteroclinic Tracking: Add an infinitesimal perturbation to the exact ECS along one of its positive eigenvectors. Run the DNS forward. The trajectory will ride the unstable manifold away from the current ECS and crash into the stable manifold of a different ECS, mapping the heteroclinic connections of the chaotic saddle. 
 
-We grab that exact 3D velocity field and feed it into a Newton solver. The solver uses a massive Jacobian matrix to find the mathematical root—the exact TW or RPO nearby.
-
-Once we have the exact mathematical state, we compute its eigenvalues. We find it has many stable directions (eigenvalues with negative real parts) and a few strictly unstable directions (positive real parts). This rigorously proves it is a saddle.
-
-We observe trajectories leaving one ECS precisely along its calculated unstable eigenvector and landing near the stable eigenvector of another ECS. This proves the heteroclinic connections of the chaotic saddle.
+*/
 
 
-- You take a snapshot of a turbulent puff from a DNS simulation.
-- You feed it into a Newton-Raphson solver adapted for massive, high-dimensional spaces (the Krylov subspace).
-- The solver iteratively searches for a state where the flow field repeats itself exactly after some time $T$, or travels downstream at a constant wave speed $c$ without changing shape.
 
 #### Physics and meaning of ECS
 ECS is governed by Waleffe's Self-Sustaining Process (SSP)
