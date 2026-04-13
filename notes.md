@@ -181,6 +181,31 @@ This is different from a tree, because in DP you can get merging, and space is c
 This model doesn't predict the Critical Reynolds Number ($Re_c$): The point where the splitting rate exactly matches the decay rate, but it does define it and help mesaure it experimentally.
 */
 
+#### Universal Scaling Exponents $\beta$
+
+I can't prove this. I can give you an intuition.
+
+Assume no spatial correlations. Mean-Field theory. 
+/* In reality, if position x is turbulent, the probability that $x+\delta x$ is also turbulent is extremely high. But we ignore this for now, we show that $\beta$ is 1, and then we re-introduce correlation and show that $\beta$ is less than 1.*/
+
+Define $\rho(t)$ as the fraction of the domain that is turbulent. Let the creation rate of turbulence be $p_b$ (branching) and the decay rate be $p_d$. The macroscopic rate equation is:
+
+$$\frac{d\rho}{dt} = p_b \rho (1 - \rho) - p_d \rho$$
+
+The $(1-\rho)$ term ensures turbulence can only spread to non-turbulent space. Steady state $\frac{d\rho}{dt} = 0$, we find two solutions. Either $\rho = 0$ (the absorbing laminar state), or:
+
+$$\rho = 1 - \frac{p_d}{p_b} \propto (p_b - p_d)^1$$
+
+/* We ignore the 1/p_b term because we care about the behaviour at p_b \approx p_d, and there p_b is a constant. lol. */
+
+This proves that above the critical point ($p_b > p_d$), the turbulent fraction grows continuously. The Mean-Field scaling exponent is strictly $\beta = 1$. 
+
+In a 1-dimensional pipe, spatial fluctuations are severe, which lowers this exponent from the theoretical $1$ to the true $1+1$D DP value of $\beta \approx 0.276$. 
+
+/*
+The reason why $\beta$ is smaller when you have spatial correlation is that the Mean-Field assumes a turbulent site is surrounded by an infinite number of neighbors to infect. In 1D space, a turbulent cluster only has two boundaries (left and right) where it can expand into laminar space. The surface area of a 1D cluster is fixed at exactly two points regardless of how large the cluster gets, the cluster is highly vulnerable to local statistical fluctuations.
+*/
+
 
 ### What each field gave us
 
