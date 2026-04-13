@@ -213,6 +213,7 @@ The $(1-\rho)$ term ensures turbulence can only spread to non-turbulent space. S
 $$\rho = 1 - \frac{p_d}{p_b} \propto (p_b - p_d)^1$$
 
 /* We ignore the 1/p_b term because we care about the behaviour at p_b \approx p_d, and there p_b is a constant. lol. */
+/* Btw if you work in the subcritical regime ($Re < Re_c$) <=> ($p_d > p_b$). $\rho$ is very small ($\rho \ll 1$), approximate $(1 - \rho) \approx 1$. then $$\rho(t) = \rho_0 e^{(p_b - p_d)t}$$ which recovers exponential decay (which we got from the memoryless).*/
 
 This proves that above the critical point ($p_b > p_d$), the turbulent fraction grows continuously. The Mean-Field scaling exponent is strictly $\beta = 1$. 
 
