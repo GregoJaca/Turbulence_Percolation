@@ -76,6 +76,14 @@ The chaotic saddle consists of:
 
 Sustained Turbulence (Above $Re_c$) = Chaotic Attractor (or Expanding Saddle): Above the critical point, the geometry changes. The saddle either undergoes a crisis and becomes a true chaotic attractor, or the spatial spreading of the turbulence outweighs the local decay rate, meaning the "effective" saddle in the spatially extended system never fully empties.
 
+#### Why do we get Saddles and Attractors?
+
+Why infinite-dimensional fluid dynamics collapses onto lower-dimensional manifolds (saddles). Because the system is strictly dissipative. Let $V$ be a volume in the phase space. Liouville's theorem: the rate of change of this volume under the fluid flow equations $\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x})$ is determined by the divergence of the velocity field:
+
+$$\frac{dV}{dt} = \int_V (\nabla \cdot \mathbf{f}) dV$$
+
+For the incompressible Navier-Stokes equations, the kinetic energy is reduced by viscous dissipation ($\nu \nabla^2 \mathbf{u}$). The system is strictly dissipative globally, the trace of the Jacobian is negative ($\nabla \cdot \mathbf{f} < 0$). 
+$\frac{dV}{dt} < 0$, all trajectories to contract onto sub-manifolds of zero volume (fixed points, periodic orbits, or chaotic saddles).
 
 ### Strong Mixing and Memorylessness
 
@@ -103,7 +111,15 @@ If you start with a localized cluster of similar initial conditions (region $A$)
 
 The chaotic saddle is not fully trapping. It has stable manifolds (directions trajectories follow to approach it) and unstable manifolds (directions trajectories follow to leave it)
 
-- The Mixing Time ($\tau_{mix}$): Characterized by the reciprocal of the positive Lyapunov exponents. This is the time it takes for the turbulent eddy dynamics to "scramble" the local phase space.
+- The Mixing Time ($\tau_{mix}$): Determined by the reciprocal of the positive Lyapunov exponents. This is the time it takes for the turbulent eddy dynamics to "scramble" the local phase space. A small cluster of initial conditions with diameter $\epsilon$ will diverge exponentially:
+
+$$\delta(t) = \epsilon e^{\lambda_{max} t}$$
+
+Complete mixing occurs when this perturbation stretches to the characteristic length scale of the entire saddle manifold, $L$. Setting $\delta(\tau_{mix}) = L$ gives:
+
+$$\tau_{mix} = \frac{1}{\lambda_{max}} \ln\left(\frac{L}{\epsilon}\right)$$
+
+
 - The Observation/Decay Time ($\tau_{decay}$): The average lifetime of the turbulent patch before the trajectory escapes the saddle and falls into the laminar state.
 
 In the transitional regime to turbulence $\tau_{mix} \ll \tau_{decay}$ 
@@ -119,6 +135,8 @@ $$P(t) = e^{-\gamma t}$$
 where $\gamma$ is the escape rate ($\gamma = 1/\tau_{decay}$). An exponential distribution is the unique continuous probability distribution that possesses the memoryless (Markov) property: 
 
 $P(T > t + s \mid T > s) = P(T > t)$.
+
+The only continuous, non-trivial solution is $P(t) = e^{-\gamma t}$.
 
 ### Memorylessness => Stochastic Modelling
 
