@@ -298,6 +298,23 @@ phase transition is macroscopic, not microscopic!
 Above the $Re-c$ the macroscopic spatial spreading rate of the turbulence exceeds the local decay rate. The fluid sustains turbulence not by altering its local deterministic dynamics into an attractor, but through spatial replication. It is a purely macroscopic effect.
 
 
+## Universality:
+
+The statistical results of the percolation (universal scaling exponents) are completely independent of the fluid's specific material properties.
+
+The macroscopic critical exponents ($\beta, \nu_\perp, \nu_\parallel$) depend only on:
+
+- The spatial dimensionality of the system (1D for pipes, 2D for Couette/channel).
+- The presence of a strictly absorbing state (laminar flow).
+- The symmetries of the order parameter (non-reversible symmetry - absorbing state - directed percolation class): The turbulent fraction $\rho$ is a scalar density ($0 \le \rho \le 1$). the state $\rho = 0$ (laminar flow) is an absorbing state.
+/* no fluctuations can bring it back alive in the percolation model, of course in the fluid dynamics model we know that a strong perturbation will induce turbulence. */
+lack of reversible symmetry + arrow of time -> Directed Percolation Universality Class
+
+
+/*
+The material properties matter for the specific coordinates:
+$$Re = \frac{U D}{\nu}$$
+*/
 
 
 
